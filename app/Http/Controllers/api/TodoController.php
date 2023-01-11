@@ -20,7 +20,7 @@ class TodoController extends Controller
     /**
      * @OA\Get(
      *     path="/api/todo",
-     *     tags={"todos"},
+     *     tags={"Todos"},
      *     summary="Get all todos",
      *     description="Multiple status values can be provided with comma separated string",
      *     operationId="index",
@@ -55,11 +55,35 @@ class TodoController extends Controller
 
 
         /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/todo/{id}/all",
+     *     tags={"Todos"},
+     *     summary="Get all todos by user id",
+     *     description="Multiple status values can be provided with comma separated string",
+     *     operationId="getall",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id of user to return todos",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
      *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     *
+     * )
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
+
     public function getall(Request $request, $id)
     {
         // return $id;
@@ -68,11 +92,31 @@ class TodoController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Add a new pet to the store.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *     path="/api/todo",
+     *     tags={"Todos"},
+     *     operationId="store",
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+  * @OA\RequestBody(
+ *    required=true,
+ *    description="Pass user credentials",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="user_id", type="integer",  example="1"),
+ *       @OA\Property(property="title", type="string",  example="Todo 1"),
+ *       @OA\Property(property="type", type="string", example="travel"),
+ *       @OA\Property(property="status", type="string", example=""),
+ *       @OA\Property(property="description", type="text", example="going to the movies"),
+ *       @OA\Property(property="date", type="date", example="2/16/2023"),
+ *    ),
+ * ),
+     * )
      */
+
     public function store(Request $request)
     {
 
@@ -88,27 +132,82 @@ class TodoController extends Controller
         return $todo;
     }
 
-    /**
-     * Display the specified resource.
+       /**
+     * @OA\Get(
+     *     path="/api/todo/{id}",
+     *     tags={"Todos"},
+     *     summary="Get to do by id",
+     *     description="Multiple status values can be provided with comma separated string",
+     *     operationId="show",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id of todo to return todos",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
      *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     *
+     * )
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
+
+
     public function show(Todo $todo)
     {
         return new TodoResource($todo);
     }
 
-    /**
-     * Update the specified resource in storage.
+        /**
+     * @OA\Put(
+     *     path="/api/todo/{todoId}",
+     *     tags={"Todos"},
+     *     summary="Updates a pet in the store with form data",
+     *     operationId="update",
+     *     @OA\Parameter(
+     *         name="todoId",
+     *         in="path",
+     *         description="ID of the todo that needs to be updated",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *     @OA\RequestBody(
+     *         description="Input data format",
+     *        @OA\JsonContent(
+     *       @OA\Property(property="user_id", type="integer",  example="1"),
+ *       @OA\Property(property="title", type="string",  example="Todo update"),
+ *       @OA\Property(property="type", type="string", example="travel"),
+ *       @OA\Property(property="status", type="string", example=""),
+ *       @OA\Property(property="description", type="text", example="going to the movies"),
+ *       @OA\Property(property="date", type="date", example="2/16/2023"),
+     *
+     *         ),
+     *     ),
+     * )
+     *
      */
-    public function update(Request $request, $id)
+
+    public function update($id, Request $request)
     {
-        $todo = Todo::create([
+        $todo = Todo::where("id", $id)->first();
+        $todo -> update([
             'user_id' => $request->user_id,
             'title' => $request->title,
             'type' => $request->type,

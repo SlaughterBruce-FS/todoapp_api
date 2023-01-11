@@ -16,7 +16,7 @@
         "/api/todo": {
             "get": {
                 "tags": [
-                    "todos"
+                    "Todos"
                 ],
                 "summary": "Get all todos",
                 "description": "Multiple status values can be provided with comma separated string",
@@ -45,6 +45,176 @@
                     },
                     "400": {
                         "description": "Invalid status value"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Add a new pet to the store.",
+                "operationId": "store",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Todo 1"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "travel"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "example": "going to the movies"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2/16/2023"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/todo/{id}/all": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Get all todos by user id",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "getall",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of user to return todos",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/todo/{id}": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Get to do by id",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of todo to return todos",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/todo/{todoId}": {
+            "put": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Updates a pet in the store with form data",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "todoId",
+                        "in": "path",
+                        "description": "ID of the todo that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Input data format",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Todo update"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "travel"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "example": "going to the movies"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2/16/2023"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
                     }
                 }
             }
