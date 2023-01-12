@@ -220,13 +220,36 @@ class TodoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/todo/{todoId}",
+     *     tags={"Todos"},
+     *     summary="Deletes a todo",
+     *     operationId="destroy",
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *     @OA\Parameter(
+     *         name="todoId",
+     *         in="path",
+     *         description="Pet id to delete",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid ID supplied",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Todo not found",
+     *     )
+     * )
      */
-    public function destroy( Todo $todo)
+    public function destroy(Todo $todo)
     {
+
+
         return $todo->delete();
     }
 }

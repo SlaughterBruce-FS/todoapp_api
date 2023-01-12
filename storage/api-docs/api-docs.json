@@ -217,6 +217,32 @@
                         "description": "Invalid input"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Deletes a todo",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "todoId",
+                        "in": "path",
+                        "description": "Pet id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Todo not found"
+                    }
+                }
             }
         }
     }
