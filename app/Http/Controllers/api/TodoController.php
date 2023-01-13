@@ -21,9 +21,11 @@ class TodoController extends Controller
      * @OA\Get(
      *     path="/api/todo",
      *     tags={"Todos"},
+     *
      *     summary="Get all todos",
      *     description="Multiple status values can be provided with comma separated string",
      *     operationId="index",
+     *
      *     @OA\Parameter(
      *         name="status",
      *         in="query",
@@ -36,6 +38,7 @@ class TodoController extends Controller
      *             enum={"available", "pending", "sold"},
      *         )
      *     ),
+     * security={ {"sanctum": {} }},
      *     @OA\Response(
      *         response=200,
      *         description="successful operation",

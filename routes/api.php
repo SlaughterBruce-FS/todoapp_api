@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\TodoController;
 use App\Http\Controllers\api\UsersController;
+use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,18 @@ Route::apiResource('users', UsersController::class);
 
 Route::apiResource('todo', TodoController::class);
 
-// Route::apiResource('login', LoginController::class);
+//protected
+// Route::middleware('auth:sanctum')->put('/todo/{id}', [TodoController::class, 'update']);
+
+
+//not protected
 
 Route::post("login", [LoginController::class, 'index']);
 
 Route::post("logout", [LoginController::class, 'logout']);
 
-Route::get("todo/{id}/all", [TodoController::class, 'getall']);
+// Route::get("todo/", [TodoController::class, 'index']);
+
+// Route::get("todo/{id}/all", [TodoController::class, 'getall']);
+
+// Route::get("todo/{id}", [TodoController::class, 'show']);

@@ -36,6 +36,21 @@ class LoginController extends Controller
 
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request, User $user)
+    {
+
+
+        $user->tokens()->delete();
+
+        return response()->json('Successfully logged out');
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
