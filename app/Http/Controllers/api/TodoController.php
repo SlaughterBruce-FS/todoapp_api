@@ -38,7 +38,7 @@ class TodoController extends Controller
      *             enum={"available", "pending", "sold"},
      *         )
      *     ),
-     * security={ {"sanctum": {} }},
+
      *     @OA\Response(
      *         response=200,
      *         description="successful operation",
@@ -105,6 +105,7 @@ class TodoController extends Controller
      *         response=405,
      *         description="Invalid input"
      *     ),
+     *   security={ {"sanctum": {} }},
   * @OA\RequestBody(
  *    required=true,
  *    description="Pass user credentials",
@@ -186,6 +187,7 @@ class TodoController extends Controller
      *             type="integer",
      *         )
      *     ),
+     *   security={ {"sanctum": {} }},
      *     @OA\Response(
      *         response=405,
      *         description="Invalid input"
@@ -239,6 +241,7 @@ class TodoController extends Controller
      *
      *         )
      *     ),
+     *    security={ {"sanctum": {} }},
      *     @OA\Response(
      *         response=400,
      *         description="Invalid ID supplied",

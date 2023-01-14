@@ -27,7 +27,9 @@ Route::apiResource('users', UsersController::class);
 Route::apiResource('todo', TodoController::class);
 
 //protected
-// Route::middleware('auth:sanctum')->put('/todo/{id}', [TodoController::class, 'update']);
+Route::middleware('auth:sanctum')->put('/todo/{id}', [TodoController::class, 'update']);
+Route::middleware('auth:sanctum')->get('/todo/{id}', [TodoController::class, 'destroy']);
+Route::middleware('auth:sanctum')->get('/todo', [TodoController::class, 'store']);
 
 
 //not protected
@@ -36,8 +38,8 @@ Route::post("login", [LoginController::class, 'index']);
 
 Route::post("logout", [LoginController::class, 'logout']);
 
-// Route::get("todo/", [TodoController::class, 'index']);
+Route::get("todo/", [TodoController::class, 'index']);
 
-// Route::get("todo/{id}/all", [TodoController::class, 'getall']);
+Route::get("todo/{id}/all", [TodoController::class, 'getall']);
 
-// Route::get("todo/{id}", [TodoController::class, 'show']);
+Route::get("todo/{id}", [TodoController::class, 'show']);

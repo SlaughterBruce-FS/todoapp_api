@@ -46,12 +46,7 @@
                     "400": {
                         "description": "Invalid status value"
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -101,7 +96,12 @@
                     "405": {
                         "description": "Invalid input"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/todo/{id}/all": {
@@ -221,7 +221,12 @@
                     "405": {
                         "description": "Invalid input"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -247,7 +252,12 @@
                     "404": {
                         "description": "Todo not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
     },
@@ -255,10 +265,9 @@
         "securitySchemes": {
             "sanctum": {
                 "type": "http",
-                "name": "bearerAuth",
-                "in": "header",
-                "bearerFormat": "JWT",
-                "scheme": "bearer"
+                "description": "Laravel Sanctum token authentication",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
